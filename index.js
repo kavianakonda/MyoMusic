@@ -57,16 +57,26 @@ Myo.on('disconnected', function() {
     console.log('disconnected the Myo rip');
 });
 
-// Myo.on('accelerometer', function(data){ 
-//  if(data.x > 0) {
-//      this.trigger('beat-beat');
-//      //beat
-//  }
-//  else if (data.x < 0){
-//      this.trigger('beat-high');
-//      //tambourine
-//  }
-// });
+Myo.on('accelerometer', function(data){ 
+    if(data.x < 0){
+        if(data.y < 0){
+            console.log('left and back');
+        }
+        if(data.y > 0){
+            console.log('right and back');
+        }
+    }
+    else if (data.x > 0){
+        if(data.y < 0){
+            console.log('left and forward');
+        }
+        if(data.y > 0){
+            console.log('right and forward');
+        }
+    }
+});
+
+
 
 Myo.on('beat-beat', function() {
     //strong beat
