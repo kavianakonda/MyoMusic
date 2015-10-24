@@ -3,12 +3,11 @@ var Player = require('player');
 
 var beat = new Player('sounds/uptown.mp3');
 var beat2 = new Player('sounds/piano.mp3');
-<<<<<<< HEAD
+
 var snare = new Player('sounds/snarebeat.mp3');
-=======
+
 var beat3 = new Player('sounds/snarebeat.mp3');
 
->>>>>>> origin/master
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
@@ -118,4 +117,4 @@ Myo.on('beat-high', function() {
 
 Myo.on('snare', function(){
     snare.play();
-})
+});
