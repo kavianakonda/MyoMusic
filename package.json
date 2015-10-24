@@ -1,0 +1,9 @@
+{
+  "name": "myo",
+  "version": "2.1.0",
+  "description": "myo music",
+  "dependencies": {
+    "ws": "^0.4.32",
+    "myo"
+  }
+}
