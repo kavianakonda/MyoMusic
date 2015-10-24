@@ -32,3 +32,29 @@ Myo.on('connected', function(){
     console.log('connected!', this.id)
     this.vibrate('long');
 });
+
+Myo.on('disconnected', function() {
+	console.log('disconnected the Myo rip');
+});
+
+Myo.on('accelerometer', function(data){ 
+	if(data.x > 0) {
+		this.trigger('beat-beat');
+		//beat
+	}
+	else if (data.x < 0){
+		this.trigger('beat-high');
+		//tambourine
+	}
+});
+
+Myo.on('beat-beat', function() {
+	this.vibrate('long');
+
+})
+
+Myo.on('beat-high', function() {
+	this.vibrate();
+});
+
+
