@@ -40,6 +40,7 @@ Myo.on('wave_on', function(){
 
 Myo.on('fingers_spread', function(){
     console.log('sticky cum on dese fings');
+
     this.vibrate();
 });
 
@@ -57,16 +58,15 @@ Myo.on('disconnected', function() {
     console.log('disconnected the Myo rip');
 });
 
-// Myo.on('accelerometer', function(data){ 
-//  if(data.x > 0) {
-//      this.trigger('beat-beat');
-//      //beat
-//  }
-//  else if (data.x < 0){
-//      this.trigger('beat-high');
-//      //tambourine
-//  }
-// });
+Myo.on('accelerometer', function(data){ 
+ if(data.x < 0) {
+    if(data.y < 0) {
+        if (data.z < 0) {
+            console.log("movind diagnoally left!");
+        }
+    }
+ }
+});
 
 Myo.on('beat-beat', function() {
     //strong beat
