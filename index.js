@@ -2,7 +2,9 @@ var Myo = require('myo');
 var Player = require('player');
 
 var beat = new Player('sounds/uptown.mp3');
-var beat2 = new Player('sounds/piano.mp3')
+var beat2 = new Player('sounds/piano.mp3');
+var beat3 = new Player('sounds/snarebeat.mp3');
+
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
@@ -59,13 +61,27 @@ Myo.on('disconnected', function() {
 });
 
 Myo.on('accelerometer', function(data){ 
- if(data.x < 0) {
-    if(data.y < 0) {
-        if (data.z < 0) {
-            console.log("movind diagnoally left!");
-        }
-    }
+ // if(data.x < 0) {
+ //    if(data.y < 0) {
+ //        if (data.z < 0) {
+ //            console.log("moving diagnoally left!");
+ //        }
+ //    }
+ // }
+ if (data.x > 0) {
+    console.log('moving forward');
+ } else if (data.x < 0) {
+    console.log('moving backward');
+ } else {
+    console.log('spin that shit');
  }
+});
+
+Myo.on('gyroscope', function(data) {
+    if (data.x > 0) {
+        console.log('turning right');
+    }
+
 });
 
 Myo.on('beat-beat', function() {
