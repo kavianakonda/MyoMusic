@@ -1,7 +1,7 @@
 var Myo = require('myo');
 var Player = require('player');
 
-var beat = new Player('sounds/snarebeat.mp3');
+var beat = new Player('sounds/uptown.mp3');
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
