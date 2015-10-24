@@ -7,17 +7,24 @@ var beat2 = new Player('sounds/piano.mp3')
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
 
-var ifFirst = 0;
+var ifFirst = 1;
 Myo.on('fist', function(){
-    if (ifFirst % 2 == 0){
-        console.log('wrap ur fist around my dick bb');
+    if (ifFirst % 2 == 1){
+        console.log('made fist number: ' + ifFirst);
         // this.vibrate();
+        this.trigger('beat-beat2-pause');
+        console.log('pause beat 2');
         this.trigger('beat-beat');
+        console.log('play beat 1');    
         ifFirst ++;
     }
-    else if (ifFirst % 2 == 1) {
+    else if (ifFirst % 2 == 0) {
+        console.log('fist number: ' + ifFirst);
         this.trigger('beat-beat-pause');
+        console.log('pause beat 1');
         this.trigger('beat-beat2');
+        console.log('play beat 2');
+        ifFirst++;
     }
 });
 
@@ -67,12 +74,16 @@ Myo.on('beat-beat', function() {
 });
 
 Myo.on('beat-beat-pause', function(){
-    beat.stop()3;
+    beat.stop();
 });
 
 Myo.on('beat-beat2', function(){
     beat2.play();
 });
+
+Myo.on('beat-beat2-pause', function(){
+    beat2.stop();
+})
 
 Myo.on('beat-high', function() {
     this.vibrate();
