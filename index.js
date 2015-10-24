@@ -9,13 +9,14 @@ Myo.connect('com.example.musicApp');
 
 var ifFirst = 0;
 Myo.on('fist', function(){
-    if (ifFirst == 0){
+    if (ifFirst % 2 == 0){
         console.log('wrap ur fist around my dick bb');
         // this.vibrate();
         this.trigger('beat-beat');
-        ifFirst = 1;
+        ifFirst ++;
     }
-    else {
+    else if (ifFirst % 2 == 1) {
+        this.trigger('beat-beat-pause');
         this.trigger('beat-beat2');
     }
 });
@@ -46,18 +47,18 @@ Myo.on('connected', function(){
 });
 
 Myo.on('disconnected', function() {
-	console.log('disconnected the Myo rip');
+    console.log('disconnected the Myo rip');
 });
 
 // Myo.on('accelerometer', function(data){ 
-// 	if(data.x > 0) {
-// 		this.trigger('beat-beat');
-// 		//beat
-// 	}
-// 	else if (data.x < 0){
-// 		this.trigger('beat-high');
-// 		//tambourine
-// 	}
+//  if(data.x > 0) {
+//      this.trigger('beat-beat');
+//      //beat
+//  }
+//  else if (data.x < 0){
+//      this.trigger('beat-high');
+//      //tambourine
+//  }
 // });
 
 Myo.on('beat-beat', function() {
@@ -65,10 +66,14 @@ Myo.on('beat-beat', function() {
     beat.play();
 });
 
+Myo.on('beat-beat-pause', function(){
+    beat.stop()3;
+});
+
 Myo.on('beat-beat2', function(){
     beat2.play();
-})
+});
 
 Myo.on('beat-high', function() {
-	this.vibrate();
+    this.vibrate();
 });
