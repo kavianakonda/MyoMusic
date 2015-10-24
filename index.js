@@ -36,6 +36,15 @@ Myo.on('wave_in', function(){
 Myo.on('wave_on', function(){
     console.log('oooh backslap that ass bitch');
     this.vibrate();
+<<<<<<< HEAD
+=======
+});5
+
+Myo.on('fingers_spread', function(){
+    console.log('sticky cum on dese fings');
+
+    this.vibrate();
+>>>>>>> origin/master
 });
 
 
@@ -53,6 +62,7 @@ Myo.on('disconnected', function() {
     console.log('disconnected the Myo rip');
 });
 
+<<<<<<< HEAD
 /*Myo.on('accelerometer', function(data){ 
     if(data.x < 0){
         if(data.y < 0){
@@ -72,6 +82,17 @@ Myo.on('disconnected', function() {
     }
 });*/
 
+=======
+Myo.on('accelerometer', function(data){ 
+ if(data.x < 0) {
+    if(data.y < 0) {
+        if (data.z < 0) {
+            console.log("movind diagnoally left!");
+        }
+    }
+ }
+});
+>>>>>>> origin/master
 
 Myo.on('beat-beat', function() {
     //strong beat
