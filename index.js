@@ -1,7 +1,7 @@
 var Myo = require('myo');
-var howler = require('../resources/howler.js');
+var Player = require('player');
 
-
+var beat = new Player('../sounds/snarebeat.mp3');
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
@@ -54,11 +54,9 @@ Myo.on('disconnected', function() {
 
 Myo.on('beat-beat', function() {
     //strong beat
-
+    beat.play();
 })
 
 Myo.on('beat-high', function() {
 	this.vibrate();
 });
-
-
