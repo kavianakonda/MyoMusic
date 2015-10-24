@@ -4,7 +4,7 @@ var Player = require('player');
 var beat = new Player('sounds/uptown.mp3');
 var beat2 = new Player('sounds/piano.mp3');
 
-var snare = new Player('sounds/cena1.mp3');
+var snare = new Player('sounds/cena2.mp3');
 
 
 //Start talking with Myo Connect
@@ -20,6 +20,7 @@ Myo.on('fist', function(){
         ifFirst++;
     }
     else if (ifFirst >= 1) {
+        this.trigger('beat-beat-pause');
         console.log('fist number: ' + ifFirst);
         this.trigger('snare');
         snare.on('playing',function(item){
