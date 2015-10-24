@@ -8,5 +8,6 @@ Myo.on('fist', function(){
     this.vibrate();
 });
 
-setInterval(requestVibrate, 3000);
-setInterval(requestSignal, 3000);
+Myo.on('connected', function(){
+    console.log('connected!', this.id)
+});
