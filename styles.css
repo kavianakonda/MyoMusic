@@ -1,3 +1,21 @@
-div{
-	
+.top{
+	background-color: purple;
+	height: 30vh;
+	text-align: center;
+	margin: 0;
+	width: 100vw;
+	padding: 0;
+	margin-top: -5vh;
+}
+h1{
+	font-size: 45px;
+	font-family: 'Open Sans', sans-serif;
+	padding-top: 20px;
+}
+canvas{
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+	height: 75%;
+	padding: 0;
 }

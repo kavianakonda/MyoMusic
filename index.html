@@ -2,13 +2,17 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="styles.css">
-<title>MyMio</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<title>MyMyo</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
 </head>
 <body>
-<script>
- 
- var camera, scene, renderer;
+
+<div class="top"> <h1>MyMyoMusic</h1> </div>
+
+
+<script> 
+var camera, scene, renderer;
 var geometry, material, mesh;
 
 init();
@@ -23,28 +27,60 @@ function init() {
 
     geometry = new THREE.BoxGeometry(200, 200, 200);
     material = new THREE.MeshBasicMaterial({
-    color: 0x0000ff
+    color: 0x000033
+    });
+    var mediumMaterial = new THREE.MeshBasicMaterial({
+    color: 0xFF0000
+    });
+    var smallMaterial = new THREE.MeshBasicMaterial({
+    color: 0xFFFFFF
+    });
+    var lineMaterial = new THREE.LineBasicMaterial({
+    color: 0xFF0000
     });
 
-    var lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x00FF00
-    });
+    var rectLength = 20, rectWidth = 5;
+
+    var rectShape = new THREE.Shape();
+    rectShape.moveTo( 20,15 );
+    rectShape.lineTo( rectLength, rectWidth );
+    rectShape.lineTo( 0, 10 );
+    rectShape.lineTo( 0, 20 );
+    rectShape.lineTo( 20, 20 );
+
+    var rectGeom = new THREE.ShapeGeometry( rectShape );
+    var rectMesh = new THREE.Mesh( rectGeom, new THREE.MeshBasicMaterial( { color: 0x999999  } ) ) ;
+
+    scene.add( rectMesh );
 
     var geometry = new THREE.Geometry();
     geometry.vertices.push(new THREE.Vector3( 10, 10 * Math.sqrt(3), 0));
     geometry.vertices.push(new THREE.Vector3(0, 0, 0));
-    geometry.vertices.push(new THREE.Vector3( -10, 10 * Math.sqrt(3), 0));
+    geometry.vertices.push(new THREE.Vector3( 0, 0, 0));
 
     var line = new THREE.Line(geometry, lineMaterial);
 
     scene.add(line);
 
     var radius = 20;
-    var segments = 32;
+    var mediumRadius = 8;
+    var smallRadius = 2;
+    
+    var segments = 64;
+    var mediumSegments = 48;
+    var smallSegments = 32;
 
     var circleGeometry = new THREE.CircleGeometry( radius, segments );
+    var mediumGeometry = new THREE.CircleGeometry( mediumRadius, mediumSegments );
+    var smallCircleGeometry = new THREE.CircleGeometry( smallRadius, smallSegments );
+
     var circle = new THREE.Mesh( circleGeometry, material );
+    var mediumCircle = new THREE.Mesh( mediumGeometry, mediumMaterial );
+    var smallCircle = new THREE.Mesh( smallCircleGeometry, smallMaterial );
+
     scene.add( circle );
+    scene.add( mediumCircle );
+    scene.add( smallCircle );
     circle.position.set(0, 0, 0);
 
     renderer = new THREE.WebGLRenderer();
@@ -63,5 +99,6 @@ function animate() {
 
 }
 </script> 
+
 </body>
 </html>
