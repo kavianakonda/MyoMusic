@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
 .top{
 	background-color: #33FF33;
 	height: 30vh;
@@ -9,8 +11,8 @@
 }
 h1{
 	font-size: 45px;
-	font-family: 'Open Sans', sans-serif;
-	padding-top: 5vh;
+	font-family: 'Raleway';
+	padding-top: 10vh;
 }
 canvas{
 	width: 100vw;
