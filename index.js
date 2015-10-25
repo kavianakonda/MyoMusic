@@ -11,6 +11,8 @@ var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
 
+var finaldata = {};
+
 app.listen(8080);
 
 function handler (req, res) {
@@ -27,9 +29,9 @@ function handler (req, res) {
 
 
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
+    if (finaldata.orientation.length == 3){
+        socket.emit('finaldata', finaldata);
+    }
   });
 });
 
