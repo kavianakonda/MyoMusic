@@ -4,15 +4,36 @@ var Player = require('player');
 var beat = new Player('sounds/friday.mp3');
 var beat2 = new Player('sounds/piano.mp3');
 
-var snare = new Player('sounds/cena2.mp3');
+var song = new Player('sounds/uptown.mp3');
+
+var laser = new Player('sounds/laser.mp3');
+var clap = new Player('sounds/clap.mp3');
+var hihat = new Player('sounds/hihat.mp3');
+var snarebeat = new Player('sounds/snarebeat.mp3');
+
+laser.on('error', function(err){
+    //console.log(err);
+});
+clap.on('error', function(err){
+    //console.log(err);
+});
+hihat.on('error', function(err){
+    //console.log(err);
+});
+snarebeat.on('error', function(err){
+    //console.log(err);
+});
 
 var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
 
 var finaldata = {};
+var counter = 0;
 
 app.listen(8080);
+
+song.play();
 
 function handler (req, res) {
   fs.readFile('index.html',
@@ -28,7 +49,7 @@ function handler (req, res) {
 
 
 io.on('connection', function (socket) {
-    if (finaldata.orientation.length == 3){
+    if (!finaldata == null){
         socket.emit('finaldata', finaldata);
     }
   });
@@ -49,18 +70,18 @@ Myo.on('fist', function() {
         this.trigger('beat-beat-pause');
         console.log('fist number: ' + ifFirst);
         this.trigger('snare');
-        snare.on('playing',function(item){
+        song.on('playing',function(item){
             console.log('im playing... src:' + item);
         });
         console.log('play snare');
-        snare.on('error', function(err){
+        song.on('error', function(err){
             // when error occurs
-            console.log(err);
+           // console.log(err);
         });
         ifFirst++;
     }
 });
-/*Myo.on('fist', function(){
+Myo.on('fist', function(){
     if (ifFirst == 0){
         console.log('made fist number: ' + ifFirst);
         // this.vibrate();
@@ -74,7 +95,7 @@ Myo.on('fist', function() {
         console.log('play snare drum');
         ifFirst++;
     }
-});*/
+});
 
 Myo.on('wave_in', function(){
     console.log('slap my booty honey');
@@ -102,15 +123,64 @@ Myo.on('disconnected', function() {
 });
 
 Myo.on('accelerometer', function(data){ 
- if (data.x > 0) {
-    console.log('moving forward');
-    this.trigger('snare');
-
- } else if (data.x < 0) {
-    console.log('moving backward');
- } else {
-    console.log('spin that shit');
- }
+    if (data.x > 0) {
+        counter++;
+        if (counter % 10 == 0){
+            var that = this;
+            setTimeout(function() {
+                console.log('moving forward');
+                that.trigger('laser');
+                laser.add('sounds/laser.mp3');
+                finaldata = data;
+            },2000);
+        }
+    } else if (data.x < 0) {
+        counter++;
+        if (counter % 10 == 0){
+            var that = this;
+            setTimeout(function() {
+                console.log('moving forward');
+                that.trigger('hihat');
+                laser.add('sounds/hihat.mp3');
+                finaldata = data;
+            },2000);
+        }
+    } else if (data.y > 0) {
+        counter++;
+        if (counter % 10 == 0){
+            var that = this;
+            setTimeout(function() {
+                console.log('moving up');
+                that.trigger('clap');
+                clap.add('sounds/clap.mp3');
+                finaldata = data;
+            },2000);  
+        }
+    } else if (data.y < 0) {
+        counter++;
+        if (counter % 10 == 0){
+            var that = this;
+            setTimeout(function() {
+                console.log('moving down');
+                that.trigger('snarebeat');
+                snarebeat.add('sounds/snarebeat.mp3');
+                finaldata = data;
+            },2000);  
+        }
+    } else if (data.z > 0) {
+        counter++;
+        if (counter % 10 == 0){
+            var that = this;
+            setTimeout(function() {
+                console.log('moving vertical');
+                that.trigger('laser');
+                snarebeat.add('sounds/laser.mp3');
+                finaldata = data;
+            },2000);  
+        }
+    } else {
+        console.log('DJ SPIN THAT');
+    }
 });
 
 Myo.on('fingers_spread', function(){
@@ -124,6 +194,22 @@ Myo.on('fingers_spread', function(){
     }
 
 });*/
+
+Myo.on('laser', function(){
+    laser.play();
+})
+
+Myo.on('hihat', function(){
+    hihat.play();
+})
+
+Myo.on('clap', function(){
+    clap.play();
+})
+
+Myo.on('snarebeat', function(){
+    snarebeat.play();
+})
 
 Myo.on('beat-beat', function() {
     //strong beat
@@ -142,6 +228,6 @@ Myo.on('beat-beat2-pause', function(){
     beat2.stop();
 });
 
-Myo.on('snare', function(){
-    snare.play();
+Myo.on('song', function(){
+    song.play();
 });
