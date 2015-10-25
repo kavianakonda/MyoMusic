@@ -122,7 +122,9 @@ Myo.on('disconnected', function() {
     console.log('disconnected the Myo rip');
 });
 
-Myo.on('accelerometer', function(data){ 
+Myo.on('accelerometer', function(data){
+    setTimeout(function(){
+
     if (data.x > 0) {
         counter++;
         if (counter % 10 == 0){
@@ -132,7 +134,7 @@ Myo.on('accelerometer', function(data){
                 that.trigger('laser');
                 laser.add('sounds/laser.mp3');
                 finaldata = data;
-            },2000);
+            },5000);
         }
     } else if (data.x < 0) {
         counter++;
@@ -143,7 +145,7 @@ Myo.on('accelerometer', function(data){
                 that.trigger('hihat');
                 laser.add('sounds/hihat.mp3');
                 finaldata = data;
-            },2000);
+            },5000);
         }
     } else if (data.y > 0) {
         counter++;
@@ -154,7 +156,7 @@ Myo.on('accelerometer', function(data){
                 that.trigger('clap');
                 clap.add('sounds/clap.mp3');
                 finaldata = data;
-            },2000);  
+            },5000);  
         }
     } else if (data.y < 0) {
         counter++;
@@ -165,7 +167,7 @@ Myo.on('accelerometer', function(data){
                 that.trigger('snarebeat');
                 snarebeat.add('sounds/snarebeat.mp3');
                 finaldata = data;
-            },2000);  
+            },5000);  
         }
     } else if (data.z > 0) {
         counter++;
@@ -176,11 +178,13 @@ Myo.on('accelerometer', function(data){
                 that.trigger('laser');
                 snarebeat.add('sounds/laser.mp3');
                 finaldata = data;
-            },2000);  
+            },5000);  
         }
     } else {
         console.log('DJ SPIN THAT');
     }
+
+    }, 4000) 
 });
 
 Myo.on('fingers_spread', function(){
