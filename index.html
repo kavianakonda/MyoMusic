@@ -5,14 +5,26 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <title>MyMyo</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
-<div class="top"> <h1>MyMyoMusic</h1> </div>
+<div class="top"> <h1>MyMyoMusic</h1>
+    
+    
+     </div>
 
 
+<script>
+    var socket = io('http://localhost');
+    socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
 <script> 
-var camera, scene, renderer;
+ 
+ var camera, scene, renderer;
 var geometry, material, mesh;
 
 init();
@@ -36,17 +48,17 @@ function init() {
     color: 0xFFFFFF
     });
     var lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xFF0000
+    color: 0x000000
     });
 
-    var rectLength = 20, rectWidth = 5;
+    var rectLength = 20, rectWidth = 4;
 
     var rectShape = new THREE.Shape();
-    rectShape.moveTo( 20,15 );
-    rectShape.lineTo( rectLength, rectWidth );
-    rectShape.lineTo( 0, 10 );
-    rectShape.lineTo( 0, 20 );
-    rectShape.lineTo( 20, 20 );
+    rectShape.moveTo( 25,18 );
+    rectShape.lineTo( 25, 14 );
+    rectShape.lineTo( 0, 14 );
+    rectShape.lineTo( 0, 18 );
+    rectShape.lineTo( 25, 18 );
 
     var rectGeom = new THREE.ShapeGeometry( rectShape );
     var rectMesh = new THREE.Mesh( rectGeom, new THREE.MeshBasicMaterial( { color: 0x999999  } ) ) ;
@@ -66,9 +78,9 @@ function init() {
     var mediumRadius = 8;
     var smallRadius = 2;
     
-    var segments = 64;
-    var mediumSegments = 48;
-    var smallSegments = 32;
+    var segments = 128;
+    var mediumSegments = 128;
+    var smallSegments = 128;
 
     var circleGeometry = new THREE.CircleGeometry( radius, segments );
     var mediumGeometry = new THREE.CircleGeometry( mediumRadius, mediumSegments );

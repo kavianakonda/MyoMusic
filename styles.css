@@ -1,5 +1,5 @@
 .top{
-	background-color: purple;
+	background-color: #33FF33;
 	height: 30vh;
 	text-align: center;
 	margin: 0;
@@ -10,7 +10,7 @@
 h1{
 	font-size: 45px;
 	font-family: 'Open Sans', sans-serif;
-	padding-top: 20px;
+	padding-top: 5vh;
 }
 canvas{
 	width: 100vw;
