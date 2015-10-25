@@ -16,16 +16,16 @@
 
 
 <script>
+    var dataToUse;
+
     var socket = io('http://localhost');
-    socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
+    socket.on('finaldata', function (data) {
+        dataToUse = data;
   });
-</script>
-<script> 
+
  
- var camera, scene, renderer;
-var geometry, material, mesh;
+    var camera, scene, renderer;
+    var geometry, material, mesh;
 
 init();
 animate();
