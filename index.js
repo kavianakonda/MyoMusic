@@ -1,7 +1,8 @@
+module.exports = 
 var Myo = require('myo');
 var Player = require('player');
 
-var beat = new Player('sounds/uptown.mp3');
+var beat = new Player('sounds/friday.mp3');
 var beat2 = new Player('sounds/piano.mp3');
 
 var snare = new Player('sounds/cena2.mp3');
