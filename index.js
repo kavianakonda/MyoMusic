@@ -7,12 +7,37 @@ var beat2 = new Player('sounds/piano.mp3');
 
 var snare = new Player('sounds/cena2.mp3');
 
+var app = require('http').createServer(handler)
+var io = require('socket.io')(app);
+var fs = require('fs');
+
+app.listen(8080);
+
+function handler (req, res) {
+  fs.readFile('index.html',
+  function (err, data) {
+    if (err) {
+      res.writeHead(500);
+      return res.end('Error loading index.html');
+    }
+    res.writeHead(200);
+    res.end(data);
+  });
+}
+
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
 
 var ifFirst = 0;
-Myo.on('fist', function(){
+Myo.on('fist', function() {
     if (ifFirst == 0){
         console.log('made fist number: ' + ifFirst);
         // this.vibrate();
@@ -76,14 +101,17 @@ Myo.on('disconnected', function() {
     console.log('disconnected the Myo rip');
 });
 
-/*Myo.on('accelerometer', function(data){ 
+Myo.on('accelerometer', function(data){ 
  if (data.x > 0) {
     console.log('moving forward');
+    this.trigger('snare');
+
  } else if (data.x < 0) {
     console.log('moving backward');
  } else {
     console.log('spin that shit');
- }*/
+ }
+});
 
 Myo.on('fingers_spread', function(){
     console.log('shooting laser');
@@ -117,5 +145,3 @@ Myo.on('beat-beat2-pause', function(){
 Myo.on('snare', function(){
     snare.play();
 });
-
-
