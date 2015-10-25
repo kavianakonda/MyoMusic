@@ -1,0 +1,16 @@
+{
+  "name": "myo",
+  "version": "2.1.0",
+  "description": "myo music",
+  "dependencies": {
+    "ws": "^0.4.32",
+    "myo":"2.1.0",
+    "underscore":"1.8.3",
+    "pool_stream":"0.0.3",
+    "speaker":"0.2.6",
+    "lame":"1.2.3",
+    "home":"0.1.8",
+    "async":"1.4.2",
+    "player":"0.5.1"
+  }
+}
