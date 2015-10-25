@@ -1,4 +1,3 @@
-module.exports = 
 var Myo = require('myo');
 var Player = require('player');
 
@@ -33,7 +32,6 @@ io.on('connection', function (socket) {
         socket.emit('finaldata', finaldata);
     }
   });
-});
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
