@@ -4,8 +4,16 @@
 <link rel="stylesheet" type="text/css" href="styles.css">
 <title>MyMio</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
+<script>
+    var socket = io('http://localhost');
+    socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
 <script>
  
  var camera, scene, renderer;
